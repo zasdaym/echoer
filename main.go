@@ -11,6 +11,8 @@ import (
 	"time"
 )
 
+var version string
+
 func main() {
 	ctx, stop := signal.NotifyContext(context.Background(), os.Interrupt, os.Kill)
 	defer stop()
@@ -55,6 +57,7 @@ func indexHandler() http.HandlerFunc {
 		Path     string      `json:"path"`
 	}
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Version", version)
 		hostname, err := os.Hostname()
 		if err != nil {
 			fmt.Fprintf(os.Stderr, "get hostname: %v", err)
@@ -76,6 +79,7 @@ func indexHandler() http.HandlerFunc {
 
 func fiveHundredHandler() http.HandlerFunc {
 	return func(w http.ResponseWriter, r *http.Request) {
+		w.Header().Add("Version", version)
 		w.WriteHeader(http.StatusInternalServerError)
 	}
 }
