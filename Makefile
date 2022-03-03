@@ -1,9 +1,9 @@
 export CGO_ENABLED := 0
 
-TAGS := $(git describe --always)
+COMMIT_SHA := $(shell git describe --always)
 
 build:
-	@go build -ldflags="-s -w" .
+	@go build -ldflags="-s -w -X main.version=${COMMIT_SHA}" .
 
 image:
-	@docker build -t zasdaym/echoer:$(TAGS) .
+	@docker build -t zasdaym/echoer:${COMMIT_SHA} .
