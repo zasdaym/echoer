@@ -35,14 +35,7 @@ func run(ctx context.Context) error {
 		return nil
 	}
 
-	mux := http.NewServeMux()
-	mux.Handle("/", indexHandler())
-	mux.Handle("/500", fiveHundredHandler())
-	srv := &http.Server{
-		Addr:    *listenAddr,
-		Handler: mux,
-	}
-
+	srv := httpServer(*listenAddr)
 	go func(ctx context.Context, srv *http.Server) {
 		<-ctx.Done()
 		shutdownCtx, stop := context.WithTimeout(context.Background(), 5*time.Second)
@@ -54,6 +47,17 @@ func run(ctx context.Context) error {
 		return err
 	}
 	return nil
+}
+
+func httpServer(addr string) *http.Server {
+	mux := http.NewServeMux()
+	mux.Handle("/", indexHandler())
+	mux.Handle("/500", fiveHundredHandler())
+	srv := &http.Server{
+		Addr:    addr,
+		Handler: mux,
+	}
+	return srv
 }
 
 func indexHandler() http.HandlerFunc {
