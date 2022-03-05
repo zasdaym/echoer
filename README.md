@@ -1,4 +1,4 @@
-# echoer
+# Echoer
 
 Simple HTTP server for testing and debugging purpose.
 
