@@ -1,6 +1,6 @@
 # echoer
 
-A simple HTTP server for testing and debugging purpose.
+Simple HTTP server for testing and debugging purpose.
 
 ## Routes
 
