@@ -4,7 +4,7 @@ RUN apt-get -y update && apt-get -y install upx-ucl && rm -rf /var/lib/apt/lists
 COPY go.mod go.sum ./
 RUN go mod tidy
 COPY . .
-RUN make build && make compress
+RUN make build compress
 
 FROM gcr.io/distroless/static
 WORKDIR /app
