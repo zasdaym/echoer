@@ -25,9 +25,15 @@ func main() {
 
 func run(ctx context.Context) error {
 	var (
-		listenAddr = flag.String("listen-addr", ":8080", "HTTP server listen address")
+		showVersion = flag.Bool("version", false, "Show version")
+		listenAddr  = flag.String("listen-addr", ":8080", "HTTP server listen address")
 	)
 	flag.Parse()
+
+	if *showVersion {
+		fmt.Print(version)
+		return nil
+	}
 
 	mux := http.NewServeMux()
 	mux.Handle("/", indexHandler())
