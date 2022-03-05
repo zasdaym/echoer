@@ -6,4 +6,4 @@ build:
 	@go build -ldflags="-s -w -X main.version=${TAGS}" .
 
 image:
-	@docker build -t zasdaym/echoer:${TAGS} .
+	@docker build -t ghcr.io/zasdaym/echoer:${TAGS} .
