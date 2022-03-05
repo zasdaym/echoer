@@ -5,5 +5,8 @@ TAGS := $(shell git describe --tags)
 build:
 	@go build -ldflags="-s -w -X main.version=${TAGS}" .
 
+compress:
+	@upx echoer
+
 image:
 	@docker build -t ghcr.io/zasdaym/echoer:${TAGS} .
