@@ -8,5 +8,5 @@ RUN make build compress
 
 FROM gcr.io/distroless/static
 WORKDIR /app
-COPY --from=builder /app/echoer .
+COPY --from=builder /app/tmp/echoer .
 CMD ["/app/echoer"]
