@@ -4,6 +4,7 @@ import (
 	"context"
 	"flag"
 	"fmt"
+	"log"
 	"net/http"
 	"os"
 	"os/signal"
@@ -19,8 +20,7 @@ func main() {
 	defer stop()
 
 	if err := run(ctx); err != nil {
-		fmt.Fprint(os.Stderr, err)
-		os.Exit(1)
+		log.Fatal(err)
 	}
 }
 

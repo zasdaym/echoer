@@ -3,7 +3,7 @@ package echoer
 import (
 	"encoding/json"
 	"errors"
-	"fmt"
+	"log"
 	"net/http"
 	"os"
 )
@@ -65,5 +65,5 @@ func httpError(w http.ResponseWriter, err error, statusCode int) {
 	w.Header().Set("Content-Type", "text/plain; charset=utf-8")
 	w.Header().Set("X-Content-Type-Options", "nosniff")
 	w.WriteHeader(statusCode)
-	fmt.Fprint(os.Stderr, err)
+	log.Println(err)
 }
